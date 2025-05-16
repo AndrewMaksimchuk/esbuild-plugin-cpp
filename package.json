@@ -1,0 +1,16 @@
+{
+  "name": "esbuild-plugin-cpp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./test.esbuild.config.js"
+  },
+  "keywords": ["c preprocessor", "preprocessor"],
+  "author": "Andrew Maksimchuk",
+  "license": "MIT",
+  "description": "Use c preprocessor 'cpp' with javascript",
+  "devDependencies": {
+    "esbuild": "^0.25.4"
+  }
+}
