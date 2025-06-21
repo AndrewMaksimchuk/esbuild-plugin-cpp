@@ -3,6 +3,26 @@
 Use `c` preprocessor `cpp` for javascript or any files.
 
 
+## Description
+
+How to use in esbuild.config.js
+
+```javascript
+import * as esbuild from 'esbuild'
+import { cppPlugin } from "./index.js"
+
+await esbuild.build({
+  entryPoints: ['test.input.js'],
+  bundle: true,
+  outfile: 'test.out.js',
+  plugins: [cppPlugin(['DEBUG'])],
+})
+```
+
+`cppPlugin` may accept optional parameter, array(string[]) of simple defined macros in code.  
+This pass each word to `-D` option of `cpp`. In example above `'DEBUG'` is defined as `1`.
+
+
 ## Example of use
 
 ### Syntax improvements
@@ -406,4 +426,9 @@ Cancel any previous definition of name, either built in or provided with a -D op
 
 `-I dir`  
 Add the directory dir to the list of directories to be searched for header files during preprocessing.
+
+`-P`  
+Inhibit generation of linemarkers in the output from the preprocessor.  This might be useful when running the preprocessor on something that is not C code, and will be sent to a program which might be confused by the linemarkers.
+
+[Source: man cpp](man cpp)
 
