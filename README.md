@@ -1,6 +1,52 @@
 # Plugin for esbuild
 
-Use `c` preprocessor `cpp` for javascript/typescript or any files.
+Use `c` preprocessor `cpp` for javascript or any files.
+
+
+## Example of use
+
+### Syntax improvements
+
+```c
+#define assert(x) if(!(x)) { throw new Error("Assertion failed: " + #x) }
+```
+
+Also, a `assert` macro can be `#ifdefed` away, so it can have no effect on production code.
+
+### Inlining code
+
+```c
+#define ISCCW(P0, P1, P2) ((P1.x - P0.x) * (P2.y - P0.y) > (P2.x - P0.x) * (P1.y - P0.y))
+```
+
+### Reducing code size
+
+```c
+#ifdef DEBUG
+     function LOG_OBJECT() { ... }
+#endif // DEBUG
+```
+
+[Source: nongnu.org](https://www.nongnu.org/espresso/js-cpp.html) 
+
+```c
+#define repeat(x) for(let i = 0; i < x; i++)
+
+function foo() {
+  repeat(10) {
+    console.log(i);
+  }
+}
+
+/* Result */
+function foo() {
+  for(let i = 0; i < 10; i++) {
+    console.log(i);
+  }
+}
+```
+
+[Source: stackoverflow.com](https://stackoverflow.com/questions/69845852/is-there-a-javascript-equivalent-to-c-preprocessor-macros#answer-70037342) 
 
 
 ## What is c preprocessor(cpp)
@@ -60,8 +106,8 @@ Makefile with a `-D` option.
 #define BUFFER_SIZE 1024
 
 #define NUMBERS 1, \
-2, \
-3
+        2, \
+        3
 int x[] = { NUMBERS };
     → int x[] = { 1, 2, 3 };
 
